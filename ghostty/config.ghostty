@@ -3,7 +3,7 @@ theme = Gruvbox Dark
 # 선택한 텍스트 자동 복사
 copy-on-select = clipboard
 
-# 마우스로 링크를 열 때 미리보기 표시
+# Command를 누른 채 URL을 가리키면 링크로 인식
 link-url = true
 
 # SSH 접속 시 Ghostty 터미널 호환성 자동 처리
