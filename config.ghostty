@@ -1,0 +1,13 @@
+theme = Gruvbox Dark
+
+# 선택한 텍스트 자동 복사
+copy-on-select = clipboard
+
+# 마우스로 링크를 열 때 미리보기 표시
+link-url = true
+
+# SSH 접속 시 Ghostty 터미널 호환성 자동 처리
+shell-integration-features = ssh-env,ssh-terminfo
+
+# 입력 중 마우스 커서 숨김
+mouse-hide-while-typing = true
