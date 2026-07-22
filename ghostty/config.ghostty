@@ -1,5 +1,8 @@
 theme = Gruvbox Dark
 
+# 폰트 (JetBrains Mono Nerd Font 설치 필요)
+font-family = JetBrainsMono Nerd Font
+
 # 선택한 텍스트 자동 복사
 copy-on-select = clipboard
 
