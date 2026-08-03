@@ -7,6 +7,7 @@
 
 ```text
 dotfiles/
+├── Brewfile
 ├── ghostty/
 │   └── config.ghostty
 └── zsh/
@@ -49,10 +50,10 @@ vid2gif 화면기록.mov 300 10   # 영상 → GIF (width=400, fps=12 기본값)
 - `$HOME/Desktop/Projects` 아래 실제 디렉터리를 방문 전에도 Tab 완성
 - `cdi`와 `zi`를 통한 대화형 검색
 
-필요한 패키지를 설치합니다.
+필요한 패키지는 `Brewfile`로 관리합니다.
 
 ```sh
-brew install fzf zoxide
+brew bundle --file "$HOME/dotfiles/Brewfile"
 ```
 
 `$HOME/.zshrc`에서 공유 설정을 불러옵니다. `.zshrc`는 이 저장소에 포함되지 않으므로
@@ -97,11 +98,10 @@ Ghostty 설정 문법은 `key = value` 형식입니다. 변경 사항은 macOS�
 
 ### 1. 준비
 
-Homebrew와 GitHub CLI가 없다면 설치합니다.
+Homebrew와 GitHub CLI가 없다면 설치하고 GitHub에 로그인합니다.
 
 ```sh
 brew install gh
-brew install --cask ghostty
 gh auth login -h github.com
 ```
 
@@ -111,7 +111,19 @@ gh auth login -h github.com
 gh repo clone finalsoul1/dotfiles "$HOME/dotfiles"
 ```
 
-### 3. 기존 설정 백업
+### 3. 패키지 설치
+
+```sh
+brew bundle --file "$HOME/dotfiles/Brewfile"
+```
+
+설치 상태는 다음 명령으로 확인합니다.
+
+```sh
+brew bundle check --file "$HOME/dotfiles/Brewfile"
+```
+
+### 4. 기존 설정 백업
 
 Ghostty를 한 번 실행한 뒤 기존 설정 파일이 있다면 백업합니다.
 
@@ -124,7 +136,7 @@ mv "$HOME/Library/Application Support/com.mitchellh.ghostty/config.ghostty" \
 기존 설정 파일이 없다면 `mv` 명령에서 `No such file or directory`가 나올 수 있으며,
 이 경우 다음 단계로 진행하면 됩니다.
 
-### 4. 설정 연결
+### 5. 설정 연결
 
 ```sh
 ln -s "$HOME/dotfiles/ghostty/config.ghostty" \
@@ -143,8 +155,8 @@ ls -l "$HOME/Library/Application Support/com.mitchellh.ghostty/config.ghostty"
 
 ```sh
 cd "$HOME/dotfiles"
-git add ghostty/config.ghostty
-git commit -m "Update Ghostty config"
+git add README.md Brewfile ghostty zsh
+git commit -m "Update dotfiles"
 git push
 ```
 
