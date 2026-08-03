@@ -1,14 +1,54 @@
 # dotfiles
 
 기기 간에 공유할 설정만 선택적으로 관리하는 개인 dotfiles 저장소입니다.
-현재는 [Ghostty](https://ghostty.org/) 설정만 포함합니다.
+현재는 [Ghostty](https://ghostty.org/)와 Zsh 디렉터리 탐색 설정을 포함합니다.
 
 ## 구조
 
 ```text
 dotfiles/
-└── ghostty/
-    └── config.ghostty
+├── ghostty/
+│   └── config.ghostty
+└── zsh/
+    └── navigation.zsh
+```
+
+## Zsh 디렉터리 탐색
+
+`zsh/navigation.zsh`는 `zoxide`와 `fzf`를 사용해 다음 기능을 제공합니다.
+
+- `cd`를 zoxide 기반 디렉터리 이동 명령으로 확장
+- 기존 `z`와 `zi` 호환 명령 유지
+- 디렉터리 이름 중간 문자열 Tab 완성
+- `$HOME/Desktop/Projects` 아래 실제 디렉터리를 방문 전에도 Tab 완성
+- `cdi`와 `zi`를 통한 대화형 검색
+
+필요한 패키지를 설치합니다.
+
+```sh
+brew install fzf zoxide
+```
+
+`$HOME/.zshrc`에서 공유 설정을 불러옵니다.
+
+```sh
+source "$HOME/dotfiles/zsh/navigation.zsh"
+```
+
+기본 프로젝트 경로가 다른 기기에서는 `source`보다 먼저 경로를 지정합니다.
+
+```sh
+export ZOXIDE_PROJECT_COMPLETION_ROOT="$HOME/Developer"
+source "$HOME/dotfiles/zsh/navigation.zsh"
+```
+
+주요 사용 예시는 다음과 같습니다.
+
+```sh
+cd 748<Tab>  # Projects 아래 실제 디렉터리 완성
+z 748<Tab>   # cd와 동일한 호환 명령
+cdi front    # zoxide 방문 기록에서 대화형 선택
+builtin cd   # 원래 Zsh 내장 cd 사용
 ```
 
 ## Ghostty 설정 명세
