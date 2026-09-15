@@ -11,6 +11,7 @@ dotfiles/
 │   └── config.ghostty
 └── zsh/
     ├── clipboard.zsh
+    ├── media.zsh
     └── navigation.zsh
 ```
 
@@ -28,6 +29,16 @@ HTML과 plain text 두 flavor를 함께 싣습니다. HTML만 넣으면 plain te
 대부분의 앱이 붙여넣기를 무시하기 때문입니다. 실행 후 `pbpaste`로 자체 검증합니다.
 `` `코드` ``와 `**굵게**`만 서식으로 변환하고 나머지는 그대로 둡니다.
 
+## 영상을 GIF로 바꾸기
+
+`zsh/media.zsh`의 `vid2gif`는 화면 기록 영상을 크기가 작은 GIF로 바꿉니다.
+
+```sh
+vid2gif 화면기록.mov 300 10   # 영상 → GIF (width=400, fps=12 기본값)
+```
+
+`ffmpeg`가 필요합니다(`brew install ffmpeg`).
+
 ## Zsh 디렉터리 탐색
 
 `zsh/navigation.zsh`는 `zoxide`와 `fzf`를 사용해 다음 기능을 제공합니다.
@@ -44,10 +55,13 @@ HTML과 plain text 두 flavor를 함께 싣습니다. HTML만 넣으면 plain te
 brew install fzf zoxide
 ```
 
-`$HOME/.zshrc`에서 공유 설정을 불러옵니다.
+`$HOME/.zshrc`에서 공유 설정을 불러옵니다. `.zshrc`는 이 저장소에 포함되지 않으므로
+새 기기에서는 아래 세 줄을 직접 추가합니다.
 
 ```sh
 source "$HOME/dotfiles/zsh/navigation.zsh"
+source "$HOME/dotfiles/zsh/media.zsh"
+source "$HOME/dotfiles/zsh/clipboard.zsh"
 ```
 
 기본 프로젝트 경로가 다른 기기에서는 `source`보다 먼저 경로를 지정합니다.
