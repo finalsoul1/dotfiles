@@ -23,11 +23,14 @@ zstyle ':completion:*' matcher-list \
 typeset -g ZOXIDE_PROJECT_COMPLETION_ROOT="${ZOXIDE_PROJECT_COMPLETION_ROOT:-$HOME/Desktop/Projects}"
 
 function __zoxide_z_complete_with_projects() {
-  __zoxide_z_complete
-  local zoxide_status=$?
+  local completion_status=1
 
-  [[ "${#words[@]}" -eq 2 && -n "${words[2]}" ]] || return "$zoxide_status"
-  [[ -d "$ZOXIDE_PROJECT_COMPLETION_ROOT" ]] || return "$zoxide_status"
+  # Prefer normal path completion when the current directory has matches.
+  _directories && return 0
+  __zoxide_z_complete && completion_status=0
+
+  [[ "${#words[@]}" -eq 2 && -n "${words[2]}" ]] || return "$completion_status"
+  [[ -d "$ZOXIDE_PROJECT_COMPLETION_ROOT" ]] || return "$completion_status"
 
   local query="${words[2]:l}"
   local directory
@@ -48,7 +51,7 @@ function __zoxide_z_complete_with_projects() {
     return 0
   fi
 
-  return "$zoxide_status"
+  return "$completion_status"
 }
 compdef __zoxide_z_complete_with_projects cd z
 
