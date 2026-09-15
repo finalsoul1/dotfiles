@@ -10,8 +10,23 @@ dotfiles/
 ├── ghostty/
 │   └── config.ghostty
 └── zsh/
+    ├── clipboard.zsh
     └── navigation.zsh
 ```
+
+## Slack에 표 붙여넣기
+
+`zsh/clipboard.zsh`의 `tbl2clip`은 마크다운 표나 TSV를 받아 클립보드에 올립니다.
+Slack 입력창에 그대로 붙여넣으면 표로 들어갑니다.
+
+```sh
+tbl2clip routes.md          # 파일에서
+cat routes.md | tbl2clip    # 파이프로
+```
+
+HTML과 plain text 두 flavor를 함께 싣습니다. HTML만 넣으면 plain text가 비어
+대부분의 앱이 붙여넣기를 무시하기 때문입니다. 실행 후 `pbpaste`로 자체 검증합니다.
+`` `코드` ``와 `**굵게**`만 서식으로 변환하고 나머지는 그대로 둡니다.
 
 ## Zsh 디렉터리 탐색
 
