@@ -38,7 +38,7 @@ HTML과 plain text 두 flavor를 함께 싣습니다. HTML만 넣으면 plain te
 vid2gif 화면기록.mov 300 10   # 영상 → GIF (width=400, fps=12 기본값)
 ```
 
-`ffmpeg`가 필요합니다(`brew install ffmpeg`).
+`ffmpeg`가 필요합니다. `Brewfile`에 포함돼 있습니다.
 
 ## Zsh 디렉터리 탐색
 
